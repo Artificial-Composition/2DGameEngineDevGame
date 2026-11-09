@@ -3,13 +3,12 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     private Rigidbody2D rb;
-
-    private void Awake()
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
     }
 
-    public void Launch (Vector2 direction, float force)
+    public void Launch(Vector2 direction, float force)
     {
         rb.AddForce(direction * force);
     }

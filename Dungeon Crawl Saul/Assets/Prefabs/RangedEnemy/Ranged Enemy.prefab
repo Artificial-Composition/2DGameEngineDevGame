@@ -30,8 +30,8 @@ Transform:
   m_GameObject: {fileID: 8712668788429873227}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.262042, y: 1.0699716, z: 0}
-  m_LocalScale: {x: 2.25, y: 2.25, z: 2.25}
+  m_LocalPosition: {x: -7.262042, y: 1.7, z: 0}
+  m_LocalScale: {x: 3.1781251, y: 3.4593751, z: 2.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -110,6 +110,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemies
   walkTime: 4
   idleTime: 2
+  fireTimer: 0.5
+  projectile: {fileID: 611141459401101879, guid: 7e2ecf894d3a98143acc162a0a8f9b56, type: 3}
 --- !u!61 &-3171703477886835022
 BoxCollider2D:
   m_ObjectHideFlags: 0

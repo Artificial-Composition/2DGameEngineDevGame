@@ -1,31 +1,37 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SocialPlatforms.Impl;
+
 
 public class Player : MonoBehaviour
 {
     public int speed;
     private Vector2 move;
     private Rigidbody2D rb;
-    private int direction;
+    private int direction = 1;
     private Animator animator;
     public float jumpHeight = 2.4f;
     public int jumpCB= 2;
     private int jumpCount;
     public bool isJumping = false;
-    [SerializeField] private GameObject ProjectilePrefab;
+    [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private GameManager gm;
+    public Transform firePosition;
+    private int lives = 3;
+    private int score = 0;
 
+
+    private void Fire()
+    {
+        GameObject go = Instantiate(projectilePrefab, firePosition.position, firePosition.rotation);
+        Projectile pro = go.GetComponent<Projectile>();
+        pro.Launch(new Vector2(direction * -1, 0), 1000);
+    }
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         jumpCount = jumpCB;
-    }
-
-    private void Fire()
-    {
-        GameObject go = Instantiate(ProjectilePrefab, rb.transform.position, Quaternion.identity);
-        Projectile pro = go.GetComponent<Projectile>();
-        pro.Launch(new Vector2(direction, 2), 800);
     }
 
     void Update()
@@ -48,9 +54,9 @@ public class Player : MonoBehaviour
             animator.SetBool("isJumping", true);
         }
 
-        if (InputSystem.actions["Attack"].IsPressed())
+        if (InputSystem.actions["RangedAttack"].IsPressed())
         {
-            InputSystem.actions["Attack"].Reset();
+            InputSystem.actions["RangedAttack"].Reset();
             Fire();
         }
     }
@@ -69,5 +75,38 @@ public class Player : MonoBehaviour
             jumpCount = jumpCB;
             animator.SetBool("isJumping", false);
         }
+        if (collision.gameObject.tag == "EnemyProjectile")
+        {
+            lives--;
+            gm.updateLives(lives);
+
+        }
+    }
+
+    public void AddRedGemCollectible()
+    {
+        score++;
+        gm.UpdateScore(score);
+        speed = speed + 2;
+    }
+
+    public void AddGreenGemCollectible()
+    {
+        score++;
+        gm.UpdateScore(score);
+        jumpCB = jumpCB + 2;
+    }
+
+    public void AddPurpleGemCollectible()
+    {
+        score++;
+        gm.UpdateScore(score);
+        jumpHeight = jumpHeight * 2;
+    }
+
+    public void AddTurquoiseGemCollectible()
+    {
+        score = score + 3;
+        gm.UpdateScore(score);
     }
 }

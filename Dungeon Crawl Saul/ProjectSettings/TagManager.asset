@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 3
   tags:
   - Ground
+  - EnemyProjectile
+  - Turquoise Gem
+  - Red Gem
+  - Purple Gem
+  - Green Gem
   layers:
   - Default
   - TransparentFX
@@ -15,9 +20,9 @@ TagManager:
   - Enemy
   - Projectile
   - Ground
-  - 
-  - 
-  - 
+  - EnemyProjectile
+  - Camera
+  - CameraConfiner
   - 
   - 
   - 
